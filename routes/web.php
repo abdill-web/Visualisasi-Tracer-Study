@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\MahasiswaLoginController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Mahasiswa\TracerStudyController as MahasiswaTracerController;
 use App\Http\Controllers\Admin\TracerStudyController as AdminTracerController;
+use App\Http\Controllers\Admin\ClusteringController;
 
 // Halaman utama → redirect ke login mahasiswa
 Route::get('/', function () {
@@ -53,6 +54,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Visualisasi Data
         Route::get('visualisasi', [\App\Http\Controllers\Admin\VisualisasiController::class, 'index'])->name('visualisasi.index');
         Route::post('ai-analysis', [\App\Http\Controllers\Admin\AIAnalysisController::class, 'analyze'])->name('ai.analysis');
+
+        // Clustering
+        Route::get('clustering', [ClusteringController::class, 'index'])->name('clustering.index');
+        Route::get('clustering/import', [ClusteringController::class, 'importForm'])->name('clustering.import');
+        Route::post('clustering/import', [ClusteringController::class, 'import'])->name('clustering.import.post');
     });
 });
 

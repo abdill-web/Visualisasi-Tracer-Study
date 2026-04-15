@@ -136,25 +136,26 @@
         </div>
 
         {{-- Row 6: Clustering & Prediksi --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-xl shadow p-6 border-2 border-dashed border-gray-200">
-                <div class="text-center py-8">
-                    <i class="fas fa-diagram-project text-4xl text-gray-300 mb-3 block"></i>
-                    <h3 class="font-semibold text-gray-500 mb-1">Clustering Pola Karir</h3>
-                    <p class="text-xs text-gray-400">Hasil clustering dari model ML akan ditampilkan di sini</p>
-                    <span class="inline-block mt-3 bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Menunggu integrasi model</span>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl shadow p-6 border-2 border-dashed border-gray-200">
-                <div class="text-center py-8">
-                    <i class="fas fa-brain text-4xl text-gray-300 mb-3 block"></i>
-                    <h3 class="font-semibold text-gray-500 mb-1">Prediksi Keberhasilan Alumni</h3>
-                    <p class="text-xs text-gray-400">Hasil prediksi XGBoost, Random Forest & Regresi Logistik akan ditampilkan di sini</p>
-                    <span class="inline-block mt-3 bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Menunggu integrasi model</span>
-                </div>
-            </div>
+{{-- Row 6: Clustering & Prediksi --}}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="{{ route('admin.clustering.index') }}"
+       class="bg-white rounded-xl shadow p-6 border-2 border-dashed border-purple-200 hover:border-purple-400 hover:shadow-md transition block">
+        <div class="text-center py-8">
+            <i class="fas fa-diagram-project text-4xl text-purple-400 mb-3 block"></i>
+            <h3 class="font-semibold text-gray-700 mb-1">Clustering Pola Karir</h3>
+            <p class="text-xs text-gray-400 mb-3">Analisis pengelompokan alumni berdasarkan model ML</p>
+            <span class="inline-block bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full font-medium">
+                <i class="fas fa-arrow-right mr-1"></i> Lihat Hasil Clustering
+            </span>
         </div>
-
+    </a>
+    <div class="bg-white rounded-xl shadow p-6 border-2 border-dashed border-gray-200">
+        <div class="text-center py-8">
+            <i class="fas fa-brain text-4xl text-gray-300 mb-3 block"></i>
+            <h3 class="font-semibold text-gray-500 mb-1">Prediksi Keberhasilan Alumni</h3>
+            <p class="text-xs text-gray-400">Hasil prediksi XGBoost, Random Forest & Regresi Logistik akan ditampilkan di sini</p>
+            <span class="inline-block mt-3 bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Menunggu integrasi model</span>
+        </div>
     </div>
 </div>
 
