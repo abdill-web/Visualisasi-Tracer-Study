@@ -46,7 +46,7 @@ class AIAnalysisController extends Controller
             . "Berikan: 1) Ringkasan 2) 3 temuan utama 3) 2 rekomendasi";
 
         try {
-$response = Http::timeout(30)->withHeaders([
+$response = Http::timeout(30)->withoutVerifying()->withHeaders([
     'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
     'Content-Type'  => 'application/json',
 ])->post('https://api.groq.com/openai/v1/chat/completions', [
