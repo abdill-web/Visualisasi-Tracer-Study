@@ -27,6 +27,9 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function () {
         Route::post('tracer', [MahasiswaTracerController::class, 'store'])->name('tracer.store');
         Route::get('tracer/edit', [MahasiswaTracerController::class, 'form'])->name('tracer.edit');
         Route::put('tracer/edit', [MahasiswaTracerController::class, 'store'])->name('tracer.update');
+
+        Route::get('chatbot', [\App\Http\Controllers\Mahasiswa\ChatbotController::class, 'index'])->name('chatbot');
+        Route::post('chatbot', [\App\Http\Controllers\Mahasiswa\ChatbotController::class, 'chat'])->name('chatbot.chat');
     });
 });
 
