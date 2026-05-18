@@ -168,10 +168,12 @@ RELEVANSI BIDANG STUDI:
 === INSTRUKSI ===
 1. Selalu gunakan data nyata di atas saat menjawab pertanyaan statistik
 2. Jika ditanya lowongan kerja, berikan link platform di atas dengan format markdown: [Nama Platform](URL)
-3. Jawab dengan bahasa Indonesia yang ramah dan natural, bukan template
-4. Maksimal 4 paragraf, to the point
-5. Jika data tidak tersedia, katakan dengan jujur
-6. Personalisasi jawaban berdasarkan prodi dan status mahasiswa yang chat
+3. DETEKSI BAHASA: Jika user menulis dalam Bahasa Inggris, jawab dalam Bahasa Inggris. Jika Bahasa Indonesia, jawab Bahasa Indonesia.
+4. Jawab dengan natural, bukan template. Gunakan data spesifik.
+5. Maksimal 5 paragraf, to the point dan lengkap
+6. Jika data tidak tersedia, katakan dengan jujur
+7. Personalisasi jawaban berdasarkan prodi dan status mahasiswa
+8. PENTING: Selalu selesaikan jawaban dengan lengkap, jangan terpotong di tengah kalimat
 PROMPT;
 
 
@@ -190,15 +192,15 @@ if ($userMessage === 'REKOMENDASI_KARIR_PERSONAL') {
 $messages[] = ['role' => 'user', 'content' => $userMessage];
 
         try {
-            $response = Http::timeout(30)->withoutVerifying()->withHeaders([
-                'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
-                'Content-Type'  => 'application/json',
-            ])->post('https://api.groq.com/openai/v1/chat/completions', [
-                'model'       => 'llama-3.3-70b-versatile',
-                'messages'    => $messages,
-                'max_tokens'  => 600,
-                'temperature' => 0.6,
-            ]);
+$response = Http::timeout(30)->withoutVerifying()->withHeaders([
+    'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
+    'Content-Type'  => 'application/json',
+])->post('https://api.groq.com/openai/v1/chat/completions', [
+    'model'       => 'llama-3.3-70b-versatile',
+    'messages'    => $messages,
+    'max_tokens'  => 1024,
+    'temperature' => 0.6,
+]);
 
             $data = $response->json();
 
@@ -308,7 +310,8 @@ Berikan rekomendasi yang mencakup:
 4. **Langkah Konkret** — 3 langkah spesifik yang bisa dilakukan sekarang
 5. **Platform Cari Kerja** — Rekomendasikan platform dengan link: [LinkedIn](https://www.linkedin.com/jobs/search/?location=Indonesia), [Glints](https://glints.com/id/opportunities/jobs/explore), [Jobstreet](https://www.jobstreet.co.id), [Kalibrr](https://www.kalibrr.com/id-ID/job-board)
 
-Jawab dengan personal, spesifik, dan motivatif. Gunakan data nyata di atas.
+Jawab dengan personal, spesifik, dan motivatif. Gunakan data nyata.
+PENTING: Jawab dalam bahasa yang sama dengan bahasa yang digunakan user. Selesaikan jawaban dengan LENGKAP jangan terpotong.
 PROMPT;
 }
 
