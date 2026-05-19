@@ -1,110 +1,364 @@
 @extends('layouts.app')
 
-@section('title', 'Chatbot - Tracer Study')
+@section('title', 'AI Career Assistant')
 
 @section('content')
-<div class="min-h-screen bg-[#0f1117] flex flex-col">
+<div class="min-h-screen bg-[#f5f7fb] flex flex-col">
 
     {{-- NAVBAR --}}
-    <nav class="bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
-                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                </svg>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200">
+
+        <div class="h-20 px-6 lg:px-10 flex items-center justify-between">
+
+            {{-- LEFT --}}
+            <div class="flex items-center gap-4">
+
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100
+                            flex items-center justify-center p-2">
+
+                    <img src="{{ asset('images/logo-kampus.png') }}"
+                         class="w-full h-full object-contain">
+                </div>
+
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">
+                        AI Career Assistant
+                    </h1>
+
+                    <p class="text-sm text-gray-500">
+                        Tracer Study Universitas Mercu Buana
+                    </p>
+                </div>
             </div>
-            <a href="{{ route('mahasiswa.dashboard') }}" class="text-gray-500 text-sm hover:text-gray-300 transition">Dashboard</a>
-            <span class="text-gray-700">/</span>
-            <span class="text-gray-300 text-sm">AI Chatbot</span>
-        </div>
-        <div class="flex items-center gap-3">
-            <span class="text-gray-500 text-sm">{{ Auth::guard('mahasiswa')->user()->nama }}</span>
-            <a href="{{ route('mahasiswa.dashboard') }}"
-               class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 border border-white/10 transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                </svg>
-                Kembali
-            </a>
+
+            {{-- RIGHT --}}
+            <div class="flex items-center gap-4">
+
+                {{-- USER --}}
+                <div class="hidden md:flex items-center gap-3
+                            bg-white border border-gray-200
+                            rounded-2xl px-4 py-2 shadow-sm">
+
+                    <div class="w-10 h-10 rounded-xl
+                                bg-gradient-to-r from-blue-500 to-indigo-500
+                                flex items-center justify-center">
+
+                        <span class="text-white font-semibold">
+                            {{ strtoupper(substr(Auth::guard('mahasiswa')->user()->nama, 0, 1)) }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">
+                            {{ Auth::guard('mahasiswa')->user()->nama }}
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Mahasiswa
+                        </p>
+                    </div>
+                </div>
+
+                {{-- BACK --}}
+                <a href="{{ route('mahasiswa.dashboard') }}"
+                   class="h-12 px-5 rounded-2xl
+                          border border-gray-200
+                          bg-white hover:bg-blue-50
+                          hover:border-blue-200
+                          text-gray-600 hover:text-blue-600
+                          transition-all duration-300
+                          flex items-center gap-2 shadow-sm">
+
+                    <svg class="w-5 h-5"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+
+                    Dashboard
+                </a>
+            </div>
         </div>
     </nav>
 
-    {{-- CHAT AREA --}}
-    <div class="flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 py-6">
+    {{-- MAIN --}}
+    <div class="flex-1 flex flex-col max-w-6xl mx-auto w-full px-6 py-6">
 
-        {{-- HEADER --}}
-        <div class="text-center mb-8">
-            <div class="w-16 h-16 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+        {{-- HERO --}}
+        <div class="relative overflow-hidden rounded-[32px]
+                    bg-gradient-to-r
+                    from-blue-600
+                    via-indigo-600
+                    to-blue-700
+                    p-7 lg:p-9
+                    mb-6 text-white shadow-2xl">
+
+            {{-- GLOW --}}
+            <div class="absolute top-[-80px] right-[-80px]
+                        w-[240px] h-[240px]
+                        rounded-full bg-white/10 blur-3xl">
             </div>
-            <h1 class="text-2xl font-bold text-white">AI Career Assistant</h1>
-            <p class="text-gray-500 text-sm mt-1">Tanyakan apa saja seputar karir dan tracer study alumni UMB</p>
+
+            <div class="relative z-10">
+
+                <div class="flex flex-col lg:flex-row
+                            lg:items-center lg:justify-between gap-6">
+
+                    {{-- LEFT --}}
+                    <div>
+
+                        <p class="uppercase tracking-[4px]
+                                  text-blue-100 text-xs mb-3">
+
+                            AI CHATBOT
+                        </p>
+
+                        <h1 class="text-3xl lg:text-[42px]
+                                   font-bold leading-tight mb-3">
+
+                            AI Career Assistant
+                        </h1>
+
+                        <p class="text-blue-100 max-w-2xl">
+                            Dapatkan rekomendasi karier, insight alumni,
+                            dan bantuan seputar tracer study secara real-time.
+                        </p>
+                    </div>
+
+                    {{-- RIGHT --}}
+                    <div class="hidden lg:flex items-center gap-4">
+
+                        <div class="bg-white/10 backdrop-blur-xl
+                                    border border-white/10
+                                    rounded-3xl px-6 py-5">
+
+                            <p class="text-sm text-blue-100 mb-1">
+                                AI Status
+                            </p>
+
+                            <h3 class="text-xl font-semibold">
+                                Online
+                            </h3>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-xl
+                                    border border-white/10
+                                    rounded-3xl px-6 py-5">
+
+                            <p class="text-sm text-blue-100 mb-1">
+                                Model
+                            </p>
+
+                            <h3 class="text-xl font-semibold">
+                                Gemini AI
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-{{-- SUGGESTED QUESTIONS --}}
-<div id="suggestions" class="mb-6">
-    {{-- Rekomendasi Karir Card --}}
-    <div class="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 rounded-2xl p-5 mb-4">
-        <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+        {{-- SUGGESTIONS --}}
+        <div id="suggestions" class="mb-6">
+
+            {{-- RECOMMENDATION --}}
+            <div class="bg-white border border-gray-200
+                        rounded-[28px] p-6 shadow-sm mb-5">
+
+                <div class="flex flex-col lg:flex-row
+                            lg:items-center lg:justify-between gap-5">
+
+                    {{-- LEFT --}}
+                    <div class="flex items-start gap-4">
+
+                        <div class="w-14 h-14 rounded-2xl
+                                    bg-blue-100
+                                    flex items-center justify-center
+                                    flex-shrink-0">
+
+                            <svg class="w-7 h-7 text-blue-500"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M9.663 17h4.673M12 3v1
+                                         m6.364 1.636l-.707.707
+                                         M21 12h-1M4 12H3
+                                         m3.343-5.657l-.707-.707
+                                         m2.828 9.9a5 5 0 117.072 0
+                                         l-.548.547A3.374 3.374 0 0014 18.469V19
+                                         a2 2 0 11-4 0v-.531
+                                         c0-.895-.356-1.754-.988-2.386
+                                         l-.548-.547z"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">
+                                Rekomendasi Karier Personal
+                            </h3>
+
+                            <p class="text-gray-500 leading-relaxed">
+                                Analisis karier berdasarkan data tracer study alumni.
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- BUTTON --}}
+                    <button onclick="getCareerRecommendation()"
+                            class="px-6 py-3 rounded-2xl
+                                   bg-gradient-to-r
+                                   from-blue-600 to-indigo-600
+                                   text-white font-semibold
+                                   hover:scale-[1.02]
+                                   transition-all duration-300
+                                   shadow-lg shadow-blue-500/20">
+
+                        Analisis Karier Saya
+                    </button>
+                </div>
             </div>
-            <div>
-                <p class="text-white text-sm font-semibold">Rekomendasi Karir Personal</p>
-                <p class="text-gray-500 text-xs">Dapatkan rekomendasi karir yang sesuai dengan profil kamu</p>
-            </div>
-        </div>
-        <button onclick="getCareerRecommendation()"
-                class="w-full py-2.5 rounded-xl text-sm font-medium text-white transition-all duration-300 hover:scale-[1.01]"
-                style="background: linear-gradient(135deg, #3b82f6, #6366f1);">
-            ✨ Analisis Karir Saya Sekarang
-        </button>
-    </div>
 
-    {{-- Quick Questions --}}
-    <div class="grid grid-cols-2 gap-3">
-        @foreach([
-            'Bidang pekerjaan apa yang paling banyak diminati alumni UMB?',
-            'Berapa rata-rata pendapatan alumni UMB per bulan?',
-            'Tips apa untuk cepat mendapat pekerjaan setelah lulus?',
-            'Ada lowongan kerja yang sesuai untuk saya?',
-        ] as $q)
-        <button onclick="sendSuggestion('{{ $q }}')"
-                class="text-left px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] hover:border-blue-500/30 transition">
-            {{ $q }}
-        </button>
-        @endforeach
-    </div>
-</div>
+            {{-- QUICK QUESTIONS --}}
+            <div class="grid md:grid-cols-2 gap-4">
 
-        {{-- MESSAGES --}}
-        <div id="chatMessages" class="flex-1 flex flex-col gap-4 mb-6 min-h-[200px]"></div>
+                @foreach([
+                    'Bidang pekerjaan apa yang paling banyak diminati alumni UMB?',
+                    'Berapa rata-rata pendapatan alumni UMB per bulan?',
+                    'Tips apa untuk cepat mendapat pekerjaan setelah lulus?',
+                    'Ada lowongan kerja yang sesuai untuk saya?',
+                ] as $q)
 
-        {{-- INPUT AREA --}}
-        <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-4">
-            <div class="flex items-end gap-3">
-                <textarea id="userInput"
-                          placeholder="Tanyakan seputar karir, pekerjaan, atau tracer study alumni UMB..."
-                          rows="1"
-                          class="flex-1 bg-transparent text-white text-sm placeholder-gray-600 resize-none focus:outline-none leading-relaxed"
-                          onkeydown="handleKeydown(event)"
-                          oninput="autoResize(this)"></textarea>
-                <button onclick="sendMessage()"
-                        id="sendBtn"
-                        class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                        style="background: linear-gradient(135deg, #3b82f6, #6366f1);">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                    </svg>
+                <button onclick="sendSuggestion('{{ $q }}')"
+                        class="text-left p-5 rounded-2xl
+                               bg-white border border-gray-200
+                               hover:border-blue-300
+                               hover:bg-blue-50/50
+                               transition-all duration-300 shadow-sm">
+
+                    <p class="text-gray-700 font-medium leading-relaxed">
+                        {{ $q }}
+                    </p>
                 </button>
+
+                @endforeach
             </div>
         </div>
 
-        <p class="text-center text-xs text-gray-700 mt-3">AI dapat membuat kesalahan. Verifikasi informasi penting secara mandiri.</p>
+        {{-- CHAT CONTAINER --}}
+        <div class="flex-1 flex flex-col
+                    bg-white border border-gray-200
+                    rounded-[32px]
+                    shadow-sm overflow-hidden">
+
+            {{-- CHAT HEADER --}}
+            <div class="border-b border-gray-100 px-6 py-5
+                        flex items-center gap-4">
+
+                <div class="w-14 h-14 rounded-2xl
+                            bg-gradient-to-r
+                            from-blue-500 to-indigo-500
+                            flex items-center justify-center
+                            shadow-lg shadow-blue-500/20">
+
+                    <svg class="w-7 h-7 text-white"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9.663 17h4.673M12 3v1
+                                 m6.364 1.636l-.707.707
+                                 M21 12h-1M4 12H3
+                                 m3.343-5.657l-.707-.707
+                                 m2.828 9.9a5 5 0 117.072 0
+                                 l-.548.547A3.374 3.374 0 0014 18.469V19
+                                 a2 2 0 11-4 0v-.531
+                                 c0-.895-.356-1.754-.988-2.386
+                                 l-.548-.547z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800">
+                        AI Career Assistant
+                    </h3>
+
+                    <p class="text-sm text-green-500">
+                        Online
+                    </p>
+                </div>
+            </div>
+
+            {{-- MESSAGES --}}
+            <div id="chatMessages"
+                 class="flex-1 overflow-y-auto
+                        px-6 py-6 flex flex-col gap-5
+                        min-h-[450px] max-h-[550px]">
+            </div>
+
+            {{-- INPUT --}}
+            <div class="border-t border-gray-100 p-5 bg-gray-50">
+
+                <div class="flex items-end gap-4">
+
+                    {{-- INPUT --}}
+                    <div class="flex-1 bg-white
+                                border border-gray-200
+                                rounded-2xl px-5 py-4">
+
+                        <textarea id="userInput"
+                                  placeholder="Tanyakan seputar karier, pekerjaan, atau tracer study alumni..."
+                                  rows="1"
+                                  class="w-full bg-transparent
+                                         text-gray-800 text-sm
+                                         placeholder-gray-400
+                                         resize-none
+                                         focus:outline-none
+                                         leading-relaxed"
+                                  onkeydown="handleKeydown(event)"
+                                  oninput="autoResize(this)"></textarea>
+                    </div>
+
+                    {{-- SEND --}}
+                    <button onclick="sendMessage()"
+                            id="sendBtn"
+                            class="w-14 h-14 rounded-2xl
+                                   bg-gradient-to-r
+                                   from-blue-600 to-indigo-600
+                                   flex items-center justify-center
+                                   hover:scale-[1.03]
+                                   transition-all duration-300
+                                   shadow-lg shadow-blue-500/20">
+
+                        <svg class="w-5 h-5 text-white"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="text-center text-xs text-gray-400 mt-4">
+                    AI dapat membuat kesalahan. Verifikasi informasi penting secara mandiri.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -129,7 +383,16 @@ function sendSuggestion(text) {
     sendMessage();
 }
 
+function formatMessage(text) {
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900">$1</strong>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
+            '<a href="$2" target="_blank" class="text-blue-600 hover:text-blue-700 underline">$1</a>')
+        .replace(/\n/g, '<br>');
+}
+
 function addMessage(role, content) {
+
     const container = document.getElementById('chatMessages');
     const isUser = role === 'user';
 
@@ -137,138 +400,242 @@ function addMessage(role, content) {
     div.className = `flex ${isUser ? 'justify-end' : 'justify-start'} items-end gap-3`;
 
     if (!isUser) {
+
         div.innerHTML = `
-            <div class="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            <div class="w-10 h-10 rounded-2xl
+                        bg-blue-100
+                        flex items-center justify-center
+                        flex-shrink-0">
+
+                <svg class="w-5 h-5 text-blue-500"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9.663 17h4.673M12 3v1"/>
                 </svg>
             </div>
-            <div class="max-w-[80%] bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-bl-sm px-5 py-3.5 text-sm text-gray-300 leading-relaxed">${formatMessage(content)}</div>
+
+            <div class="max-w-[80%]
+                        bg-gray-100
+                        rounded-3xl rounded-bl-md
+                        px-5 py-4
+                        text-sm text-gray-700
+                        leading-relaxed">
+
+                ${formatMessage(content)}
+            </div>
         `;
+
     } else {
+
         div.innerHTML = `
-            <div class="max-w-[80%] px-5 py-3.5 rounded-2xl rounded-br-sm text-sm text-white leading-relaxed" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">${content}</div>
-            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 text-xs font-bold text-white">
-                {{ strtoupper(substr(Auth::guard('mahasiswa')->user()->nama, 0, 1)) }}
+            <div class="max-w-[80%]
+                        px-5 py-4
+                        rounded-3xl rounded-br-md
+                        text-sm text-white
+                        leading-relaxed
+                        bg-gradient-to-r
+                        from-blue-600 to-indigo-600">
+
+                ${content}
+            </div>
+
+            <div class="w-10 h-10 rounded-2xl
+                        bg-gradient-to-r
+                        from-blue-500 to-indigo-500
+                        flex items-center justify-center
+                        flex-shrink-0">
+
+                <span class="text-white text-sm font-bold">
+                    {{ strtoupper(substr(Auth::guard('mahasiswa')->user()->nama, 0, 1)) }}
+                </span>
             </div>
         `;
     }
 
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
-    return div;
-}
-
-function formatMessage(text) {
-    return text
-        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
-        .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition">$1 ↗</a>')
-        .replace(/\n/g, '<br>');
 }
 
 function addTypingIndicator() {
+
     const container = document.getElementById('chatMessages');
+
     const div = document.createElement('div');
+
     div.id = 'typingIndicator';
+
     div.className = 'flex justify-start items-end gap-3';
+
     div.innerHTML = `
-        <div class="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        <div class="w-10 h-10 rounded-2xl
+                    bg-blue-100
+                    flex items-center justify-center">
+
+            <svg class="w-5 h-5 text-blue-500"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9.663 17h4.673M12 3v1"/>
             </svg>
         </div>
-        <div class="bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-bl-sm px-5 py-4 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style="animation-delay:0ms"></span>
-            <span class="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style="animation-delay:150ms"></span>
-            <span class="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style="animation-delay:300ms"></span>
+
+        <div class="bg-gray-100
+                    rounded-3xl rounded-bl-md
+                    px-5 py-4 flex items-center gap-1.5">
+
+            <span class="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-150"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-300"></span>
         </div>
     `;
+
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
 }
 
 async function sendMessage() {
+
     const input = document.getElementById('userInput');
     const message = input.value.trim();
+
     if (!message) return;
 
     document.getElementById('suggestions').style.display = 'none';
 
     addMessage('user', message);
-    chatHistory.push({ role: 'user', content: message });
+
+    chatHistory.push({
+        role: 'user',
+        content: message
+    });
 
     input.value = '';
     input.style.height = 'auto';
 
     const btn = document.getElementById('sendBtn');
+
     btn.disabled = true;
     btn.style.opacity = '0.5';
 
     addTypingIndicator();
 
     try {
+
         const response = await fetch("{{ route('mahasiswa.chatbot.chat') }}", {
+
             method: 'POST',
+
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ message, history: chatHistory.slice(-10) })
+
+            body: JSON.stringify({
+                message,
+                history: chatHistory.slice(-10)
+            })
         });
 
         const data = await response.json();
 
         document.getElementById('typingIndicator')?.remove();
+
         addMessage('assistant', data.reply);
-        chatHistory.push({ role: 'assistant', content: data.reply });
+
+        chatHistory.push({
+            role: 'assistant',
+            content: data.reply
+        });
 
     } catch (err) {
+
         document.getElementById('typingIndicator')?.remove();
-        addMessage('assistant', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
+
+        addMessage('assistant',
+            'Maaf, terjadi kesalahan. Silakan coba lagi.');
     }
 
     btn.disabled = false;
     btn.style.opacity = '1';
+
     input.focus();
 }
 
-// Welcome message
 window.addEventListener('load', () => {
+
     setTimeout(() => {
-        addMessage('assistant', 'Halo **{{ Auth::guard('mahasiswa')->user()->nama }}**! 👋\n\nSaya adalah AI Career Assistant Tracer Study UMB. Saya siap membantu kamu dengan informasi seputar:\n\n- Pola karir dan pekerjaan alumni UMB\n- Tips mencari kerja dan wirausaha\n- Informasi tracer study\n- Dan pertanyaan lainnya seputar karir\n\nAda yang bisa saya bantu?');
+
+        addMessage(
+            'assistant',
+            'Halo {{ Auth::guard('mahasiswa')->user()->nama }}.<br><br>Saya adalah AI Career Assistant Tracer Study UMB.<br><br>Saya siap membantu terkait:<br><br>• Pola karier alumni UMB<br>• Tips mencari kerja<br>• Rekomendasi karier<br>• Informasi tracer study<br><br>Ada yang bisa saya bantu?'
+        );
+
     }, 500);
 });
 
 async function getCareerRecommendation() {
+
     document.getElementById('suggestions').style.display = 'none';
 
     const message = "REKOMENDASI_KARIR_PERSONAL";
-    addMessage('user', '✨ Analisis rekomendasi karir saya');
-    chatHistory.push({ role: 'user', content: message });
+
+    addMessage('user', 'Analisis rekomendasi karier saya');
+
+    chatHistory.push({
+        role: 'user',
+        content: message
+    });
 
     const btn = document.getElementById('sendBtn');
+
     btn.disabled = true;
     btn.style.opacity = '0.5';
+
     addTypingIndicator();
 
     try {
+
         const response = await fetch("{{ route('mahasiswa.chatbot.chat') }}", {
+
             method: 'POST',
+
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ message, history: [] })
+
+            body: JSON.stringify({
+                message,
+                history: []
+            })
         });
 
         const data = await response.json();
+
         document.getElementById('typingIndicator')?.remove();
+
         addMessage('assistant', data.reply);
-        chatHistory.push({ role: 'assistant', content: data.reply });
+
+        chatHistory.push({
+            role: 'assistant',
+            content: data.reply
+        });
 
     } catch (err) {
+
         document.getElementById('typingIndicator')?.remove();
-        addMessage('assistant', 'Maaf, terjadi kesalahan. Silakan coba lagi.');
+
+        addMessage('assistant',
+            'Maaf, terjadi kesalahan. Silakan coba lagi.');
     }
 
     btn.disabled = false;

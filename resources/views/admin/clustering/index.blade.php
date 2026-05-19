@@ -3,194 +3,380 @@
 @section('title', 'Hasil Clustering')
 
 @section('content')
-<div class="min-h-screen bg-[#0f1117]">
+
+<div class="min-h-screen bg-[#f5f7fb]">
 
     {{-- NAVBAR --}}
-    <nav class="bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 17v-2m3 2v-4m3 4V7m2 12H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2z"/>
-                </svg>
-            </div>
+    <nav class="bg-white border-b border-gray-200
+                px-8 py-4 sticky top-0 z-50">
 
-            <a href="{{ route('admin.dashboard') }}"
-               class="text-gray-500 text-sm hover:text-gray-300 transition">
-                Dashboard
-            </a>
+        <div class="max-w-7xl mx-auto
+                    flex items-center justify-between">
 
-            <span class="text-gray-700">/</span>
+            {{-- LEFT --}}
+            <div class="flex items-center gap-4">
 
-            <span class="text-gray-300 text-sm">
-                Hasil Clustering
-            </span>
-        </div>
+                <div class="w-14 h-14 rounded-2xl
+                            bg-gradient-to-br
+                            from-purple-500 to-indigo-600
+                            flex items-center justify-center
+                            shadow-lg shadow-purple-500/20">
 
-        <div class="flex items-center gap-4">
-
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-                <div class="w-6 h-6 rounded-full bg-purple-500/30 flex items-center justify-center">
-                    <span class="text-purple-400 text-xs font-bold">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                    </span>
+                    <img src="{{ asset('images/logo-kampus.png') }}"
+                         alt="Logo"
+                         class="w-8 h-8 object-contain">
                 </div>
 
-                <span class="text-gray-300 text-sm">
-                    {{ Auth::user()->name }}
-                </span>
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">
+                        Clustering AI
+                    </h1>
+
+                    <p class="text-sm text-gray-500">
+                        Machine Learning Career Analysis
+                    </p>
+                </div>
             </div>
 
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
+            {{-- RIGHT --}}
+            <div class="flex items-center gap-4">
 
-                <button type="submit"
-                    class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 border border-white/10 transition">
+                {{-- USER --}}
+                <div class="flex items-center gap-3
+                            bg-white border border-gray-200
+                            rounded-2xl px-4 py-2 shadow-sm">
 
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                    </svg>
+                    <div class="w-11 h-11 rounded-xl
+                                bg-gradient-to-br
+                                from-purple-500 to-indigo-600
+                                flex items-center justify-center
+                                text-white font-bold">
 
-                    Logout
-                </button>
-            </form>
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">
+                            {{ Auth::user()->name }}
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Administrator
+                        </p>
+                    </div>
+                </div>
+
+                {{-- LOGOUT --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit"
+                            class="flex items-center gap-2
+                                   px-5 py-3 rounded-2xl
+                                   bg-white border border-gray-200
+                                   text-gray-600 hover:text-red-500
+                                   hover:border-red-200
+                                   transition-all duration-300
+                                   shadow-sm">
+
+                        <svg class="w-5 h-5"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1
+                                     a3 3 0 01-3 3H6a3 3 0 01-3-3V7
+                                     a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
 
-    <div class="px-8 py-10 max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto px-6 py-10">
 
-        {{-- HEADER --}}
-        <div class="flex items-center justify-between mb-10">
+        {{-- HERO --}}
+        <div class="bg-gradient-to-r
+                    from-purple-500
+                    via-indigo-500
+                    to-purple-600
+                    rounded-[36px]
+                    p-10 lg:p-12
+                    shadow-xl shadow-purple-500/10
+                    mb-8">
+
+            <div class="flex flex-col lg:flex-row
+                        lg:items-center
+                        lg:justify-between gap-8">
+
+                {{-- LEFT --}}
+                <div>
+
+                    <p class="text-purple-100
+                              text-xs uppercase
+                              tracking-[0.4em]
+                              mb-4">
+
+                        MACHINE LEARNING
+                    </p>
+
+                    <h1 class="text-5xl lg:text-6xl
+                               font-bold text-white
+                               leading-tight mb-4">
+
+                        Career<br>
+                        Clustering
+                    </h1>
+
+                    <p class="text-purple-100 text-lg">
+                        Analisis pengelompokan pola karir alumni
+                        menggunakan machine learning clustering.
+                    </p>
+                </div>
+
+                {{-- RIGHT --}}
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="bg-white/10 backdrop-blur-md
+                                border border-white/10
+                                rounded-[28px]
+                                px-6 py-5 min-w-[170px]">
+
+                        <p class="text-purple-100 text-sm mb-2">
+                            Total Data
+                        </p>
+
+                        <h3 class="text-4xl font-bold text-white">
+                            {{ $total }}
+                        </h3>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-md
+                                border border-white/10
+                                rounded-[28px]
+                                px-6 py-5 min-w-[170px]">
+
+                        <p class="text-purple-100 text-sm mb-2">
+                            Cluster Aktif
+                        </p>
+
+                        <h3 class="text-4xl font-bold text-white">
+                            2
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- TOP ACTION --}}
+        <div class="flex flex-col lg:flex-row
+                    lg:items-center
+                    lg:justify-between gap-5 mb-6">
 
             <div>
-                <p class="text-gray-600 text-xs uppercase tracking-widest mb-2">
-                    Machine Learning
+
+                <p class="text-xs uppercase
+                          tracking-[0.3em]
+                          text-gray-500 mb-2">
+
+                    CLUSTERING RESULT
                 </p>
 
-                <h1 class="text-3xl font-bold text-white">
-                    Hasil Clustering Pola Karir
-                </h1>
-
-                <p class="text-gray-500 text-sm mt-1">
-                    Analisis pengelompokan alumni berdasarkan model ML
-                </p>
+                <h2 class="text-3xl font-bold text-gray-900">
+                    Hasil Analisis Cluster
+                </h2>
             </div>
 
             <a href="{{ route('admin.clustering.import') }}"
-               class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
-                      bg-purple-500 hover:bg-purple-600
-                      text-white text-sm font-semibold transition">
+               class="inline-flex items-center justify-center gap-2
+                      px-6 py-4 rounded-2xl
+                      text-white font-semibold
+                      shadow-lg shadow-purple-500/20
+                      transition-all duration-300
+                      hover:scale-[1.01]"
+               style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
 
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+
                     <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M7 16a4 4 0 01-.88-7.903A5
+                             5 0 1115.9 6L16 6a5 5 0
+                             011 9.9M15 13l-3-3m0 0l-3
+                             3m3-3v12"/>
                 </svg>
 
                 Import CSV
             </a>
-
         </div>
 
         {{-- ALERT --}}
         @if(session('success'))
-            <div class="mb-6 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl px-5 py-4 text-sm">
-                <div class="flex items-center gap-2">
 
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M5 13l4 4L19 7"/>
-                    </svg>
+        <div class="mb-6 bg-emerald-50
+                    border border-emerald-200
+                    text-emerald-700
+                    rounded-[28px]
+                    px-6 py-5">
 
+            <div class="flex items-center gap-3">
+
+                <svg class="w-5 h-5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"/>
+                </svg>
+
+                <span class="font-medium">
                     {{ session('success') }}
-                </div>
+                </span>
             </div>
+        </div>
+
         @endif
 
         {{-- STATS --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-            <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+            {{-- CARD --}}
+            <div class="bg-white rounded-[32px]
+                        border border-gray-200
+                        shadow-sm p-7">
 
-                <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center justify-between mb-5">
 
-                    <p class="text-gray-500 text-xs uppercase tracking-wide">
-                        Total Data
-                    </p>
+                    <div>
 
-                    <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <p class="text-sm text-gray-500 mb-1">
+                            Total Data
+                        </p>
+
+                        <h2 class="text-5xl font-bold text-gray-900">
+                            {{ $total }}
+                        </h2>
+                    </div>
+
+                    <div class="w-16 h-16 rounded-2xl
+                                bg-blue-100
+                                flex items-center justify-center">
+
+                        <svg class="w-8 h-8 text-blue-600"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
                             <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 17v-2m3 2v-4m3 4V7"/>
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M9 17v-2m3 2v-4m3
+                                     4V7m2 12H5a2 2 0
+                                     01-2-2V5a2 2 0
+                                     012-2h14a2 2 0
+                                     012 2v12a2 2 0
+                                     01-2 2z"/>
                         </svg>
                     </div>
                 </div>
 
-                <p class="text-3xl font-bold text-white">
-                    {{ $total }}
+                <p class="text-gray-500 text-sm">
+                    Total data hasil clustering
                 </p>
             </div>
 
-            <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+            {{-- CARD --}}
+            <div class="bg-white rounded-[32px]
+                        border border-gray-200
+                        shadow-sm p-7">
 
-                <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center justify-between mb-5">
 
-                    <p class="text-gray-500 text-xs uppercase tracking-wide">
-                        Cluster 0
-                    </p>
+                    <div>
 
-                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <p class="text-sm text-gray-500 mb-1">
+                            Cluster 0
+                        </p>
+
+                        <h2 class="text-5xl font-bold text-gray-900">
+                            {{ $cluster0 }}
+                        </h2>
+                    </div>
+
+                    <div class="w-16 h-16 rounded-2xl
+                                bg-emerald-100
+                                flex items-center justify-center">
+
+                        <svg class="w-8 h-8 text-emerald-600"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
                             <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"/>
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M5 13l4 4L19 7"/>
                         </svg>
                     </div>
                 </div>
 
-                <p class="text-3xl font-bold text-white">
-                    {{ $cluster0 }}
-                </p>
-
-                <p class="text-xs text-gray-500 mt-2">
-                    High Performer
+                <p class="text-gray-500 text-sm">
+                    High performer cluster
                 </p>
             </div>
 
-            <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+            {{-- CARD --}}
+            <div class="bg-white rounded-[32px]
+                        border border-gray-200
+                        shadow-sm p-7">
 
-                <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center justify-between mb-5">
 
-                    <p class="text-gray-500 text-xs uppercase tracking-wide">
-                        Cluster 1
-                    </p>
+                    <div>
 
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <p class="text-sm text-gray-500 mb-1">
+                            Cluster 1
+                        </p>
+
+                        <h2 class="text-5xl font-bold text-gray-900">
+                            {{ $cluster1 }}
+                        </h2>
+                    </div>
+
+                    <div class="w-16 h-16 rounded-2xl
+                                bg-amber-100
+                                flex items-center justify-center">
+
+                        <svg class="w-8 h-8 text-amber-600"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
                             <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 8v4l3 3"/>
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 8v4l3 3"/>
                         </svg>
                     </div>
                 </div>
 
-                <p class="text-3xl font-bold text-white">
-                    {{ $cluster1 }}
-                </p>
-
-                <p class="text-xs text-gray-500 mt-2">
-                    Moderate Performer
+                <p class="text-gray-500 text-sm">
+                    Moderate performer cluster
                 </p>
             </div>
-
         </div>
 
         @if($total > 0)
@@ -199,107 +385,141 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 
             {{-- DONUT --}}
-            <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden">
+            <div class="bg-white rounded-[32px]
+                        border border-gray-200
+                        shadow-sm p-7">
 
-                <div class="px-6 py-4 border-b border-white/[0.06]">
-                    <h2 class="text-white font-semibold text-sm">
-                        Distribusi Cluster
-                    </h2>
+                <div class="mb-5">
 
-                    <p class="text-gray-500 text-xs mt-1">
-                        Proporsi alumni per cluster
+                    <p class="text-xs uppercase
+                              tracking-[0.3em]
+                              text-gray-500 mb-2">
+
+                        DISTRIBUSI CLUSTER
                     </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900">
+                        Proporsi Cluster
+                    </h3>
                 </div>
 
-                <div class="p-6">
-                    <div class="relative h-72">
-                        <canvas id="chartCluster"></canvas>
-                    </div>
+                <div class="relative h-80">
+                    <canvas id="chartCluster"></canvas>
                 </div>
-
             </div>
 
             {{-- RADAR --}}
-            <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden">
+            <div class="bg-white rounded-[32px]
+                        border border-gray-200
+                        shadow-sm p-7">
 
-                <div class="px-6 py-4 border-b border-white/[0.06]">
-                    <h2 class="text-white font-semibold text-sm">
-                        Rata-rata Kompetensi
-                    </h2>
+                <div class="mb-5">
 
-                    <p class="text-gray-500 text-xs mt-1">
-                        Perbandingan kompetensi antar cluster
+                    <p class="text-xs uppercase
+                              tracking-[0.3em]
+                              text-gray-500 mb-2">
+
+                        KOMPETENSI
                     </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900">
+                        Perbandingan Kompetensi
+                    </h3>
                 </div>
 
-                <div class="p-6">
-                    <div class="relative h-72">
-                        <canvas id="chartKompetensi"></canvas>
-                    </div>
+                <div class="relative h-80">
+                    <canvas id="chartKompetensi"></canvas>
                 </div>
-
             </div>
-
         </div>
 
-        {{-- BAR CHART --}}
-        <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden mb-6">
+        {{-- BAR --}}
+        <div class="bg-white rounded-[32px]
+                    border border-gray-200
+                    shadow-sm p-7 mb-6">
 
-            <div class="px-6 py-4 border-b border-white/[0.06]">
-                <h2 class="text-white font-semibold text-sm">
-                    Distribusi per Program Studi
-                </h2>
+            <div class="mb-5">
 
-                <p class="text-gray-500 text-xs mt-1">
-                    Sebaran cluster berdasarkan program studi
+                <p class="text-xs uppercase
+                          tracking-[0.3em]
+                          text-gray-500 mb-2">
+
+                    PROGRAM STUDI
                 </p>
+
+                <h3 class="text-2xl font-bold text-gray-900">
+                    Distribusi per Program Studi
+                </h3>
             </div>
 
-            <div class="p-6">
-                <div class="relative h-96">
-                    <canvas id="chartProdi"></canvas>
-                </div>
+            <div class="relative h-[450px]">
+                <canvas id="chartProdi"></canvas>
             </div>
-
         </div>
 
         @else
 
         {{-- EMPTY --}}
-        <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-16 text-center">
+        <div class="bg-white rounded-[36px]
+                    border border-gray-200
+                    shadow-sm p-16 text-center">
 
-            <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-24 h-24 rounded-[32px]
+                        bg-gray-100
+                        flex items-center justify-center
+                        mx-auto mb-6">
+
+                <svg class="w-12 h-12 text-gray-500"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+
                     <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 17v-2m3 2v-4m3 4V7"/>
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 17v-2m3 2v-4m3
+                             4V7m2 12H5a2 2 0
+                             01-2-2V5a2 2 0
+                             012-2h14a2 2 0
+                             012 2v12a2 2 0
+                             01-2 2z"/>
                 </svg>
             </div>
 
-            <h3 class="text-lg font-semibold text-gray-400 mb-2">
-                Belum ada data clustering
+            <h3 class="text-3xl font-bold
+                       text-gray-800 mb-3">
+
+                Belum Ada Data Clustering
             </h3>
 
-            <p class="text-gray-500 text-sm mb-6">
-                Import file CSV hasil clustering dari model machine learning
+            <p class="text-gray-500 mb-8 max-w-xl mx-auto">
+                Import file CSV hasil clustering machine learning
+                untuk mulai melihat hasil analisis AI alumni.
             </p>
 
             <a href="{{ route('admin.clustering.import') }}"
-                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl
-                       bg-purple-500 hover:bg-purple-600
-                       text-white text-sm font-semibold transition">
+               class="inline-flex items-center gap-2
+                      px-6 py-4 rounded-2xl
+                      text-white font-semibold
+                      shadow-lg shadow-purple-500/20"
+               style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
 
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+
                     <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M7 16a4 4 0 01-.88-7.903A5
+                             5 0 1115.9 6L16 6a5 5 0
+                             011 9.9M15 13l-3-3m0 0l-3
+                             3m3-3v12"/>
                 </svg>
 
                 Import CSV Sekarang
             </a>
-
         </div>
 
         @endif
@@ -308,38 +528,40 @@
 </div>
 
 @if($total > 0)
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
 const cluster0 = {{ $cluster0 }};
 const cluster1 = {{ $cluster1 }};
-const kompetensiData = @json($kompetensiCluster);
-const perProdiData = @json($perProdi);
 
-Chart.defaults.color = '#9CA3AF';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+const kompetensiData = @json($kompetensiCluster);
+const perProdiData   = @json($perProdi);
+
+Chart.defaults.color = '#6b7280';
+Chart.defaults.borderColor = '#e5e7eb';
 
 new Chart(document.getElementById('chartCluster'), {
+
     type: 'doughnut',
+
     data: {
-        labels: ['Cluster 0 — High Performer', 'Cluster 1 — Moderate Performer'],
+        labels: [
+            'Cluster 0 — High Performer',
+            'Cluster 1 — Moderate Performer'
+        ],
+
         datasets: [{
             data: [cluster0, cluster1],
             backgroundColor: ['#10B981', '#F59E0B'],
             borderWidth: 0
         }]
     },
+
     options: {
         responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    color: '#9CA3AF'
-                }
-            }
-        }
+        maintainAspectRatio: false
     }
 });
 
@@ -355,7 +577,9 @@ const kompetensiLabels = [
 ];
 
 const radarDatasets = kompetensiData.map(d => ({
+
     label: `Cluster ${d.label_cluster}`,
+
     data: [
         d.etika,
         d.keahlian,
@@ -367,99 +591,101 @@ const radarDatasets = kompetensiData.map(d => ({
         d.kepemimpinan
     ].map(v => parseFloat(v) || 0),
 
-    borderColor: d.label_cluster == 0 ? '#10B981' : '#F59E0B',
-    backgroundColor: d.label_cluster == 0 ? '#10B98120' : '#F59E0B20',
+    borderColor: d.label_cluster == 0
+        ? '#10B981'
+        : '#F59E0B',
+
+    backgroundColor: d.label_cluster == 0
+        ? '#10B98120'
+        : '#F59E0B20',
+
     borderWidth: 2,
-    pointRadius: 4,
+    pointRadius: 4
 }));
 
 new Chart(document.getElementById('chartKompetensi'), {
+
     type: 'radar',
+
     data: {
         labels: kompetensiLabels,
         datasets: radarDatasets
     },
+
     options: {
         responsive: true,
         maintainAspectRatio: false,
+
         scales: {
             r: {
                 beginAtZero: true,
-                max: 5,
-                ticks: {
-                    stepSize: 1,
-                    color: '#9CA3AF',
-                    backdropColor: 'transparent'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.08)'
-                },
-                pointLabels: {
-                    color: '#D1D5DB'
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    color: '#9CA3AF'
-                }
+                max: 5
             }
         }
     }
 });
 
-const prodiList = [...new Set(perProdiData.map(d => d.program_studi))];
+const prodiList = [
+    ...new Set(perProdiData.map(
+        d => d.program_studi
+    ))
+];
 
 const c0Data = prodiList.map(p => {
-    const found = perProdiData.find(d => d.program_studi === p && d.label_cluster == 0);
+
+    const found = perProdiData.find(
+        d => d.program_studi === p
+        && d.label_cluster == 0
+    );
+
     return found ? found.total : 0;
 });
 
 const c1Data = prodiList.map(p => {
-    const found = perProdiData.find(d => d.program_studi === p && d.label_cluster == 1);
+
+    const found = perProdiData.find(
+        d => d.program_studi === p
+        && d.label_cluster == 1
+    );
+
     return found ? found.total : 0;
 });
 
 new Chart(document.getElementById('chartProdi'), {
+
     type: 'bar',
+
     data: {
+
         labels: prodiList,
+
         datasets: [
+
             {
                 label: 'Cluster 0',
                 data: c0Data,
                 backgroundColor: '#10B981',
-                borderRadius: 6
+                borderRadius: 8
             },
+
             {
                 label: 'Cluster 1',
                 data: c1Data,
                 backgroundColor: '#F59E0B',
-                borderRadius: 6
+                borderRadius: 8
             }
         ]
     },
+
     options: {
+
         responsive: true,
         maintainAspectRatio: false,
 
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    color: '#9CA3AF'
-                }
-            }
-        },
-
         scales: {
+
             x: {
                 stacked: true,
-                ticks: {
-                    color: '#9CA3AF'
-                },
                 grid: {
                     display: false
                 }
@@ -467,17 +693,14 @@ new Chart(document.getElementById('chartProdi'), {
 
             y: {
                 stacked: true,
-                beginAtZero: true,
-                ticks: {
-                    color: '#9CA3AF'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.08)'
-                }
+                beginAtZero: true
             }
         }
     }
 });
+
 </script>
+
 @endif
+
 @endsection

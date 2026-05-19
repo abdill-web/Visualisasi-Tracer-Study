@@ -50,48 +50,62 @@ public function import(Request $request)
         'Des' => '12',
     ];
 
-    while (($row = fgetcsv($handle, 0, ',')) !== false) {
-        if (count($row) < 2) continue;
+while (($row = fgetcsv($handle, 0, ',')) !== false) {
+    if (count($row) < 2) continue;
 
-        $nim           = trim($row[$headerMap['NIM']] ?? '');
-        $nama          = trim($row[$headerMap['MHSNAMA']] ?? '');
-        $tgl_lahir_raw = trim($row[$headerMap['TGL LAHIR']] ?? '');
-        $jurusan       = trim($row[$headerMap['JURUSAN']] ?? '');
+    $nim           = trim($row[$headerMap['NIM']] ?? '');
+    $nama          = trim($row[$headerMap['MHSNAMA']] ?? '');
+    $tgl_lahir_raw = trim($row[$headerMap['TGL LAHIR']] ?? '');
+    $jurusan       = trim($row[$headerMap['JURUSAN']] ?? '');
 
-        if (empty($nim)) continue;
+    // Ambil tahun lulus dari SEMESTER LULUS atau TGL YUDISIUM
+    $tahun_lulus = null;
+    $semesterLulus = trim($row[$headerMap['SEMESTER LULUS']] ?? '');
+    $tglYudisium   = trim($row[$headerMap['TGL YUDISIUM']] ?? '');
 
-        // Convert "5-Okt-92" → "1992-10-05"
-        $tgl_lahir = null;
-        if (!empty($tgl_lahir_raw)) {
-            $parts = explode('-', $tgl_lahir_raw);
-            if (count($parts) === 3) {
-                $day   = str_pad($parts[0], 2, '0', STR_PAD_LEFT);
-                $month = $bulanMap[$parts[1]] ?? '01';
-                $year  = $parts[2];
-                // Tahun 2 digit → 4 digit
-                if (strlen($year) === 2) {
-                    $year = ($year > 30) ? '19' . $year : '20' . $year;
-                }
-                $tgl_lahir = "{$year}-{$month}-{$day}";
-            }
-        }
-
-        if (Mahasiswa::where('nim', $nim)->exists()) {
-            $skipped++;
-            continue;
-        }
-
-        Mahasiswa::create([
-            'nim'           => $nim,
-            'nama'          => $nama,
-            'tanggal_lahir' => $tgl_lahir,
-            'program_studi' => $jurusan,
-            'fakultas'      => null,
-            'tahun_masuk'   => null,
-            'tahun_lulus'   => null,
-        ]);
-        $imported++;
+    if (!empty($tglYudisium)) {
+        // Extract tahun dari "28 Februari 2025" → 2025
+        preg_match('/\d{4}/', $tglYudisium, $matches);
+        $tahun_lulus = $matches[0] ?? null;
+    } elseif (!empty($semesterLulus)) {
+        // Extract tahun dari "GANJIL TA 2024/2025" → 2025
+        preg_match('/\d{4}/', $semesterLulus, $matches);
+        $tahun_lulus = $matches[0] ?? null;
     }
+
+    if (empty($nim)) continue;
+
+    // Convert tanggal lahir
+    $tgl_lahir = null;
+    if (!empty($tgl_lahir_raw)) {
+        $parts = explode('-', $tgl_lahir_raw);
+        if (count($parts) === 3) {
+            $day   = str_pad($parts[0], 2, '0', STR_PAD_LEFT);
+            $month = $bulanMap[$parts[1]] ?? '01';
+            $year  = $parts[2];
+            if (strlen($year) === 2) {
+                $year = ($year > 30) ? '19' . $year : '20' . $year;
+            }
+            $tgl_lahir = "{$year}-{$month}-{$day}";
+        }
+    }
+
+    if (Mahasiswa::where('nim', $nim)->exists()) {
+        $skipped++;
+        continue;
+    }
+
+    Mahasiswa::create([
+        'nim'           => $nim,
+        'nama'          => $nama,
+        'tanggal_lahir' => $tgl_lahir,
+        'program_studi' => $jurusan,
+        'fakultas'      => null,
+        'tahun_masuk'   => null,
+        'tahun_lulus'   => $tahun_lulus,
+    ]);
+    $imported++;
+}
 
     fclose($handle);
 
