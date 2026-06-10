@@ -62,6 +62,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('clustering', [ClusteringController::class, 'index'])->name('clustering.index');
         Route::get('clustering/import', [ClusteringController::class, 'importForm'])->name('clustering.import');
         Route::post('clustering/import', [ClusteringController::class, 'import'])->name('clustering.import.post');
+        Route::get('clustering/predict', [ClusteringController::class, 'predict'])->name('clustering.predict');
+        Route::delete('clustering/reset', [ClusteringController::class, 'reset'])->name('clustering.reset');
     });
 });
 
