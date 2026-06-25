@@ -664,58 +664,73 @@
                 </div>
             </a>
 
-            {{-- PREDIKSI --}}
-            <div class="bg-white rounded-[32px]
-                        border border-dashed border-gray-300
-                        shadow-sm p-8">
+{{-- PREDIKSI --}}
+<a href="{{ route('admin.prediksi.index') }}"
+   class="group bg-white rounded-[32px]
+          border border-gray-200
+          shadow-sm p-8
+          hover:shadow-xl
+          hover:-translate-y-1
+          transition-all duration-300">
 
-                <div class="text-center py-8">
+    <div class="text-center py-8">
 
-                    <div class="w-20 h-20 rounded-[28px]
-                                bg-gray-100
-                                flex items-center justify-center
-                                mx-auto mb-6">
+        <div class="w-20 h-20 rounded-[28px]
+                    bg-violet-100
+                    flex items-center justify-center
+                    mx-auto mb-6
+                    group-hover:scale-105
+                    transition">
 
-                        <svg class="w-10 h-10 text-gray-500"
-                             fill="none"
-                             stroke="currentColor"
-                             viewBox="0 0 24 24">
+            <svg class="w-10 h-10 text-violet-600"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
 
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M9.663 17h4.673M12
-                                     3v1m6.364 1.636
-                                     l-.707.707"/>
-                        </svg>
-                    </div>
-
-                    <h3 class="text-2xl font-bold
-                               text-gray-700 mb-3">
-
-                        Prediksi Alumni
-                    </h3>
-
-                    <p class="text-gray-500 mb-6">
-                        Model prediksi keberhasilan alumni
-                        akan segera tersedia.
-                    </p>
-
-                    <span class="inline-flex items-center gap-2
-                                 px-4 py-2 rounded-full
-                                 bg-amber-100
-                                 text-amber-700
-                                 font-medium">
-
-                        <div class="w-2 h-2 rounded-full
-                                    bg-amber-500 animate-pulse">
-                        </div>
-
-                        Coming Soon
-                    </span>
-                </div>
-            </div>
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9.663 17h4.673M12 3v1m6.364
+                         1.636l-.707.707M21 12h-1M4 12H3
+                         m3.343-5.657l-.707-.707m2.828
+                         9.9a5 5 0 117.072 0l-.548.547A3.374
+                         3.374 0 0014 18.469V19a2 2 0 11-4
+                         0v-.531c0-.895-.356-1.754-.988
+                         -2.386l-.548-.547z"/>
+            </svg>
         </div>
+
+        <h3 class="text-2xl font-bold
+                   text-gray-900 mb-3">
+            Prediksi Alumni
+        </h3>
+
+        <p class="text-gray-500 mb-6">
+            Klasifikasi tingkat keberhasilan alumni
+            menggunakan Random Forest & XGBoost.
+        </p>
+
+        <span class="inline-flex items-center gap-2
+                     px-4 py-2 rounded-full
+                     bg-violet-100
+                     text-violet-700
+                     font-medium">
+
+            Lihat Prediksi
+
+            <svg class="w-4 h-4"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"/>
+            </svg>
+        </span>
+    </div>
+</a>
 
     </div>
 </div>

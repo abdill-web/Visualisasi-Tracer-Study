@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Mahasiswa\TracerStudyController as MahasiswaTracerController;
 use App\Http\Controllers\Admin\TracerStudyController as AdminTracerController;
 use App\Http\Controllers\Admin\ClusteringController;
+use App\Http\Controllers\Admin\PrediksiController;
 
 // Halaman utama → redirect ke login mahasiswa
 Route::get('/', function () {
@@ -64,6 +65,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('clustering/import', [ClusteringController::class, 'import'])->name('clustering.import.post');
         Route::get('clustering/predict', [ClusteringController::class, 'predict'])->name('clustering.predict');
         Route::delete('clustering/reset', [ClusteringController::class, 'reset'])->name('clustering.reset');
+
+        // Prediksi Keberhasilan
+        Route::get('prediksi', [PrediksiController::class, 'index'])->name('prediksi.index');
+        Route::post('prediksi/predict', [PrediksiController::class, 'predict'])->name('prediksi.predict');
     });
 });
 
